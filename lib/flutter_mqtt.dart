@@ -1,7 +1,4 @@
 library flutter_mqtt;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/broadcast_stream.dart';
+export 'src/mqtt_connect.dart';
