@@ -23,7 +23,7 @@ dependencies:
   flutter_tracers:
     git:
       url: https://github.com/GitHubStuff/flutter_tracers.git
-  mqtt_client: ^6.0.0
+  mqtt_client: ^6.0.0 # ^5.6.1
   shared_preferences: ^0.5.6+1
 
 dev_dependencies:

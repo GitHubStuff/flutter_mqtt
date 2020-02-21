@@ -42,13 +42,13 @@ class MQTTManager {
   final String _identifier;
   final String _host;
   final String _topic;
-  final Sink _sink;
+  final Sink<MQTTResponse> _sink;
   // Constructor
   MQTTManager({
     @required String host,
     @required String topic,
-    @required String identifier,
-    @required Sink<MQTTStream> sink,
+    String identifier = '7.1.1 Nougat',
+    @required Sink sink,
     MQTTAppConnectionState state = MQTTAppConnectionState.disconnected,
   })  : assert(host != null),
         assert(topic != null),
@@ -137,9 +137,10 @@ class MQTTManager {
   /// The unsolicited disconnect callback
   void onDisconnected() {
     Log.t('mqtt Client disconnection');
-    if (_client.connectionStatus.returnCode == mqtt.MqttConnectReturnCode.solicited) {
-      Log.t('mqtt OnDisconnected callback');
-    }
+//    if (_client.connectionStatus.returnCode == mqtt.MqttConnectReturnCode.solicited) {
+//      Log.t('mqtt OnDisconnected callback');
+//    }
+    Log.w('code = ${_client.connectionStatus.returnCode}');
     _currentState = MQTTAppConnectionState.disconnected;
   }
 
