@@ -3,7 +3,7 @@ description: An MQTT Flutter package.
 ## from the terminal: "git add -f .idea/dictionaries" to port dictionary of added words like sqflite
 # Paste just below 'description:'
 
-version: 0.0.1+1
+version: 0.0.1+2
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
