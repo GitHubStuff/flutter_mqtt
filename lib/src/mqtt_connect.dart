@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tracers/trace.dart' as Log;
-import 'package:mqtt_client/mqtt_client.dart' as mqtt;
+import 'package:mqtt_client/mqtt_client.dart';
 
 import 'broadcast_stream.dart';
 
@@ -38,7 +38,7 @@ enum MQTTAppConnectionState {
 class MQTTManager {
   // Private instance of client
   MQTTAppConnectionState _currentState;
-  mqtt.MqttClient _client;
+  MqttClient _client;
   final String _identifier;
   final String _host;
   final String _topic;
@@ -68,7 +68,7 @@ class MQTTManager {
   }) {
     assert(port != null && port > 0);
     assert(keepAliveSeconds != null && keepAliveSeconds > 5);
-    _client = mqtt.MqttClient(_host, _identifier);
+    _client = MqttClient(_host, _identifier);
     _client.port = port;
     _client.keepAlivePeriod = keepAliveSeconds;
     _client.onDisconnected = onDisconnected;
@@ -78,12 +78,12 @@ class MQTTManager {
     _client.onConnected = onConnected;
     _client.onSubscribed = onSubscribed;
 
-    final mqtt.MqttConnectMessage connMess = mqtt.MqttConnectMessage()
+    final MqttConnectMessage connMess = MqttConnectMessage()
         .withClientIdentifier(_identifier)
         .withWillTopic('willtopic') // If you set this you must set a will message
         .withWillMessage('My Will message')
         .startClean() // Non persistent session for testing
-        .withWillQos(mqtt.MqttQos.atLeastOnce);
+        .withWillQos(MqttQos.atLeastOnce);
     _sink.add(MQTTResponse(MQTTAppConnectionState.initialize, _topic, 'mqtt client initializing'));
     Log.t('mqtt client connecting....');
     _client.connectionMessage = connMess;
@@ -111,9 +111,9 @@ class MQTTManager {
   }
 
   void publish(String message) {
-    final mqtt.MqttClientPayloadBuilder builder = mqtt.MqttClientPayloadBuilder();
+    final MqttClientPayloadBuilder builder = MqttClientPayloadBuilder();
     builder.addString(message);
-    _client.publishMessage(_topic, mqtt.MqttQos.exactlyOnce, builder.payload);
+    _client.publishMessage(_topic, MqttQos.exactlyOnce, builder.payload);
     _sink.add(MQTTResponse(MQTTAppConnectionState.publish, _topic, message));
   }
 
@@ -122,10 +122,10 @@ class MQTTManager {
     _currentState = MQTTAppConnectionState.connected;
     Log.t('...mqtt client connected');
     _sink.add(MQTTResponse(MQTTAppConnectionState.connected, _topic, '...mqtt client connected'));
-    _client.subscribe(_topic, mqtt.MqttQos.atLeastOnce);
-    _client.updates.listen((List<mqtt.MqttReceivedMessage<mqtt.MqttMessage>> c) {
-      final mqtt.MqttPublishMessage recMess = c[0].payload;
-      final String payload = mqtt.MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+    _client.subscribe(_topic, MqttQos.atLeastOnce);
+    _client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+      final MqttPublishMessage recMess = c[0].payload;
+      final String payload = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
       _sink.add(MQTTResponse(MQTTAppConnectionState.data, _topic, payload));
 
