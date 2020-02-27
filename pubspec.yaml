@@ -2,7 +2,7 @@ name: flutter_mqtt
 description: An MQTT Flutter package.
 ## from the terminal: "git add -f .idea/dictionaries" to port dictionary of added words like sqflite
 
-version: 0.0.2+2
+version: 0.0.2+3
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
   flutter_abstract_package:
     git:
-      url: https://github.com/GitHubStuff/flutter_abstract_package.git
+      url: https://github.com/SilversphereInc/flutter_abstract_classes.git
   flutter_strings:
     git:
       url: https://github.com/GitHubStuff/flutter_strings.git

@@ -104,6 +104,7 @@
           <value>
             <list>
               <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_abstract_package-bc02fddf391ea350b945ad8c434b372e9198c79f/lib" />
+              <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_abstract_classes-bc02fddf391ea350b945ad8c434b372e9198c79f/lib" />
             </list>
           </value>
         </entry>
@@ -375,6 +376,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_abstract_classes-bc02fddf391ea350b945ad8c434b372e9198c79f/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_abstract_package-bc02fddf391ea350b945ad8c434b372e9198c79f/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_strings-0c1cf3c56a9cc2ca6e2ed2c175b362599a31515d/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-6b52354fd4c5e844e4818bf67fa94e6e25585dd8/lib" />
