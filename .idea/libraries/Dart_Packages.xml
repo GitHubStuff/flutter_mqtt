@@ -133,7 +133,7 @@
           <value>
             <list>
               <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-6b52354fd4c5e844e4818bf67fa94e6e25585dd8/lib" />
-              <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-8b87d1af05bd1a5305741331c3bac9890931a5fe/lib" />
+              <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-dbb22660e2af7a8970da951b45c9c575f5495d65/lib" />
             </list>
           </value>
         </entry>
@@ -141,6 +141,7 @@
           <value>
             <list>
               <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_tracers-ea702168b572fd1371f1ee3e5a6c389367942598/lib" />
+              <option value="$USER_HOME$/development/flutter/.pub-cache/git/flutter_tracers-7cca4500d46aedce9ce3edc0ec6797aabc3751df/lib" />
             </list>
           </value>
         </entry>
@@ -380,7 +381,8 @@
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_abstract_package-bc02fddf391ea350b945ad8c434b372e9198c79f/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_strings-0c1cf3c56a9cc2ca6e2ed2c175b362599a31515d/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-6b52354fd4c5e844e4818bf67fa94e6e25585dd8/lib" />
-      <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-8b87d1af05bd1a5305741331c3bac9890931a5fe/lib" />
+      <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_theme_package-dbb22660e2af7a8970da951b45c9c575f5495d65/lib" />
+      <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_tracers-7cca4500d46aedce9ce3edc0ec6797aabc3751df/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/git/flutter_tracers-ea702168b572fd1371f1ee3e5a6c389367942598/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/after_layout-1.0.7+2/lib" />
       <root url="file://$USER_HOME$/development/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.11/lib" />
