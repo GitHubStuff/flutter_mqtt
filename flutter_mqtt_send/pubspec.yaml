@@ -10,10 +10,13 @@ dependencies:
   after_layout: ^1.0.7+2
   auto_size_text: ^2.1.0
   cupertino_icons: ^0.1.3
-  flutter_mqtt:
-    path: ../
   flutter:
     sdk: flutter
+  flutter_abstract_package:
+    git:
+      url: https://github.com/GitHubStuff/flutter_abstract_package.git
+  flutter_mqtt:
+    path: ../
   flutter_strings:
     git:
       url: https://github.com/GitHubStuff/flutter_strings.git

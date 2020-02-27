@@ -157,7 +157,7 @@ class _MQTTester extends State<MQTTester> with WidgetsBindingObserver, AfterLayo
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('Broker: http://test.mosquitto.org, subject: silversphere/funstuff'),
+              child: Text('Broker: test.mosquitto.org, subject: silversphere/funstuff'),
             ),
           ],
         ),

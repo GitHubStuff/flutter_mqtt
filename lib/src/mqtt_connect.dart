@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_abstract_package/flutter_abstract_package.dart';
 import 'package:flutter_tracers/trace.dart' as Log;
 import 'package:mqtt_client/mqtt_client.dart';
-
-import 'broadcast_stream.dart';
 
 enum MQTTAppConnectionState {
   connected,
@@ -13,37 +12,43 @@ enum MQTTAppConnectionState {
   publish,
 }
 
-//class MQTTAppState with ChangeNotifier {
-//  MQTTAppConnectionState _appConnectionState = MQTTAppConnectionState.disconnected;
-//
-//  void setReceivedText(String text) {
-//    _receivedText = text;
-//    _historyText = _historyText + '\n' + _receivedText;
-//    notifyListeners();
-//  }
-//
-//  void setAppConnectionState(MQTTAppConnectionState state) {
-//    _appConnectionState = state;
-//    notifyListeners();
-//  }
-//
-//  String get getReceivedText => _receivedText;
-//  String get getHistoryText => _historyText;
-//  MQTTAppConnectionState get getAppConnectionState => _appConnectionState;
-//}
+class MQTTResponse {
+  final String data;
+  final MQTTAppConnectionState mqttAppConnectionState;
+  final String topic;
+  MQTTResponse(this.mqttAppConnectionState, this.topic, this.data);
+}
+
+class MQTTStream extends BroadcastStream<MQTTResponse> {
+  @override
+  void dispose() {
+    super.close();
+  }
+}
 
 ///
 /// **************************************************************************
 ///
 class MQTTManager {
-  // Private instance of client
-  MQTTAppConnectionState _currentState;
+  /// Private instance of client
   MqttClient _client;
+
+  /// Internal reference that holds state of the mqtt connection, accessible via getter
+  MQTTAppConnectionState _currentState;
+
+  /// String that is prepended to MQTT messages
   final String _identifier;
+
+  /// The url-style host of the mqtt server
   final String _host;
+
+  /// The topic to subscribe to
   final String _topic;
+
+  /// Async Dart Sink that will receive mqtt state and data messages
   final Sink<MQTTResponse> _sink;
-  // Constructor
+
+  /// Constructor
   MQTTManager({
     @required String host,
     @required String topic,
@@ -61,6 +66,11 @@ class MQTTManager {
         _currentState = state,
         _sink = sink;
 
+  /// Getter for current state
+  MQTTAppConnectionState get currentState => _currentState;
+
+  /// this initialize the mqtt session, creating a client that can be connected to and
+  /// subscribe to the mqtt server to listen for messages
   void initializeMQTTClient({
     int port = 1883,
     int keepAliveSeconds = 30,
@@ -89,7 +99,7 @@ class MQTTManager {
     _client.connectionMessage = connMess;
   }
 
-  // Connect to the host
+  /// Connect to the mqtt server and start listening for messages
   Future<void> connect() async {
     assert(_client != null);
     try {
@@ -103,13 +113,14 @@ class MQTTManager {
     }
   }
 
+  /// Disconnect from the mqtt server
   void disconnect() {
     Log.t('mqtt Disconnected');
     _sink.add(MQTTResponse(MQTTAppConnectionState.disconnected, _topic, 'mqtt client disconnected'));
-
     _client.disconnect();
   }
 
+  /// Publish a message to the mqtt server
   void publish(String message) {
     final MqttClientPayloadBuilder builder = MqttClientPayloadBuilder();
     builder.addString(message);
@@ -117,13 +128,19 @@ class MQTTManager {
     _sink.add(MQTTResponse(MQTTAppConnectionState.publish, _topic, message));
   }
 
-  /// The successful connect callback
+  /// The successful connect callback, this is called by the mqtt_client that was created in initialize phase
+  /// to respond when connection is made. When there is a connection, the updates.listen of the client will
+  /// be called when an mqtt message is published.
   void onConnected() {
     _currentState = MQTTAppConnectionState.connected;
     Log.t('...mqtt client connected');
     _sink.add(MQTTResponse(MQTTAppConnectionState.connected, _topic, '...mqtt client connected'));
     _client.subscribe(_topic, MqttQos.atLeastOnce);
+
+    /// This is the listener that will receive messages from the mqtt-server
     _client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+      /// Because the data is a byte stream it is converted into string and returned via the Sink.add
+      /// so that interested listeners all receive the data
       final MqttPublishMessage recMess = c[0].payload;
       final String payload = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
@@ -131,21 +148,18 @@ class MQTTManager {
 
       Log.t('mqtt Change notification:: topic is <${c[0].topic}>, payload is <-- $payload -->');
     });
-    print('mqtt OnConnected client callback - Client connection was sucessful');
+    Log.t('mqtt OnConnected client callback - Client connection was sucessful');
   }
 
   /// The unsolicited disconnect callback
   void onDisconnected() {
     Log.t('mqtt Client disconnection');
-//    if (_client.connectionStatus.returnCode == mqtt.MqttConnectReturnCode.solicited) {
-//      Log.t('mqtt OnDisconnected callback');
-//    }
-    Log.w('code = ${_client.connectionStatus.returnCode}');
+    Log.t('code = ${_client.connectionStatus.returnCode}');
     _currentState = MQTTAppConnectionState.disconnected;
   }
 
   /// The subscribed callback
   void onSubscribed(String topic) {
-    print('mqtt Subscription confirmed for topic $topic');
+    Log.t('mqtt Subscription confirmed for topic $topic');
   }
 }
