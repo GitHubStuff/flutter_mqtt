@@ -146,7 +146,7 @@ class MQTTManager {
 
       _sink.add(MQTTResponse(MQTTAppConnectionState.data, _topic, payload));
 
-      Log.t('mqtt Change notification:: topic is <${c[0].topic}>, payload is <-- $payload -->');
+      Log.t('mqtt Change notification:: topic is <${c[0].topic}>, payload is <-- ${payload.substring(0, 60)}... -->');
     });
     Log.t('mqtt OnConnected client callback - Client connection was sucessful');
   }
