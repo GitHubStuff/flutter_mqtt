@@ -85,12 +85,12 @@ class MQTTManager implements MQTTBaseClass {
     _client = MqttClient(_host, _identifier);
     _client.port = port;
     _client.keepAlivePeriod = keepAliveSeconds;
-    _client.onDisconnected = onDisconnected;
+    _client.onDisconnected = _onDisconnected;
     _client.logging(on: logging ?? false);
 
     /// Add the successful connection callback
-    _client.onConnected = onConnected;
-    _client.onSubscribed = onSubscribed;
+    _client.onConnected = _onConnected;
+    _client.onSubscribed = _onSubscribed;
 
     final MqttConnectMessage connMess = MqttConnectMessage()
         .withClientIdentifier(_identifier)
@@ -135,7 +135,7 @@ class MQTTManager implements MQTTBaseClass {
   /// The successful connect callback, this is called by the mqtt_client that was created in initialize phase
   /// to respond when connection is made. When there is a connection, the updates.listen of the client will
   /// be called when an mqtt message is published.
-  void onConnected() {
+  void _onConnected() {
     _currentState = MQTTAppConnectionState.connected;
     Log.t('...mqtt client connected');
     _sink.add(MQTTResponse(MQTTAppConnectionState.connected, _topic, '...mqtt client connected'));
@@ -156,14 +156,14 @@ class MQTTManager implements MQTTBaseClass {
   }
 
   /// The unsolicited disconnect callback
-  void onDisconnected() {
+  void _onDisconnected() {
     Log.t('mqtt Client disconnection');
     Log.t('code = ${_client.connectionStatus.returnCode}');
     _currentState = MQTTAppConnectionState.disconnected;
   }
 
   /// The subscribed callback
-  void onSubscribed(String topic) {
+  void _onSubscribed(String topic) {
     Log.t('mqtt Subscription confirmed for topic $topic');
   }
 }

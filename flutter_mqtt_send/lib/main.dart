@@ -130,6 +130,7 @@ class _MQTTester extends State<MQTTester> with WidgetsBindingObserver, AfterLayo
     _hostTextController.dispose();
     _messageTextController.dispose();
     _topicTextController.dispose();
+    mqttManager.disconnect();
     super.dispose();
   }
 
