@@ -26,10 +26,14 @@ class MQTTStream extends BroadcastStream<MQTTResponse> {
   }
 }
 
+abstract class MQTTBaseClass {
+  MQTTBaseClass({String host, String identifier, String topic, Sink<MQTTResponse> sink});
+}
+
 ///
 /// **************************************************************************
 ///
-class MQTTManager {
+class MQTTManager implements MQTTBaseClass {
   /// Private instance of client
   MqttClient _client;
 
@@ -53,7 +57,7 @@ class MQTTManager {
     @required String host,
     @required String topic,
     String identifier = '7.1.1 Nougat',
-    @required Sink sink,
+    @required Sink<MQTTResponse> sink,
     MQTTAppConnectionState state = MQTTAppConnectionState.disconnected,
   })  : assert(host != null),
         assert(topic != null),
