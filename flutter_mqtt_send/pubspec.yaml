@@ -1,7 +1,7 @@
 name: flutter_mqtt_send
 description: An MQTT send application.
 
-version: 0.0.1+1
+version: 0.0.2+1
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
@@ -14,19 +14,19 @@ dependencies:
     sdk: flutter
   flutter_abstract_package:
     git:
-      url: https://github.com/GitHubStuff/flutter_abstract_package.git
+      url: https://github.com/SilversphereInc/flutter_abstract_classes.git
   flutter_mqtt:
     path: ../
   flutter_strings:
     git:
-      url: https://github.com/GitHubStuff/flutter_strings.git
+      url: https://github.com/SilversphereInc/flutter_strings.git
   flutter_theme_package:
     git:
-      url: https://github.com/GitHubStuff/flutter_theme_package.git
+      url: https://github.com/SilversphereInc/flutter_theme_package.git
   flutter_tracers:
     git:
-      url: https://github.com/GitHubStuff/flutter_tracers.git
-  shared_preferences: ^0.5.6+1
+      url: https://github.com/SilversphereInc/flutter_tracers.git
+  shared_preferences: ^0.5.6+2
 
 dev_dependencies:
   flutter_test:

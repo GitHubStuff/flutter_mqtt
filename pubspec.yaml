@@ -1,8 +1,7 @@
 name: flutter_mqtt
-description: An MQTT Flutter package.
-## from the terminal: "git add -f .idea/dictionaries" to port dictionary of added words like sqflite
+description: An MQTT Flutter package
 
-version: 0.0.3+1
+version: 0.0.3+2
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
@@ -25,8 +24,8 @@ dependencies:
   flutter_tracers:
     git:
       url: https://github.com/SilversphereInc/flutter_tracers.git
-  mqtt_client: ^5.6.1
-  shared_preferences: ^0.5.6+1
+  mqtt_client: ^5.6.1  # Do not move to new release
+  shared_preferences: ^0.5.6+2
 
 dev_dependencies:
   flutter_test:
